@@ -1,0 +1,53 @@
+export default function reducer(state={
+    user: {
+      id: null,
+      name: null,
+      pwd: null,
+    
+    fetching: false,
+    fetched: false,
+    error: null,
+    user_add_successfull:false
+    },
+  }, action) {
+
+    switch (action.type) {
+      case "FETCH_USER": {
+        return {...state, fetching: true}
+      }
+      case "FETCH_USER_REJECTED": {
+        return {...state, fetching: false, error: action.payload}
+      }
+      case "FETCH_USER_FULFILLED": {
+        return {
+          ...state,
+          fetching: false,
+          fetched: true,
+          user: action.payload,
+        }
+      }
+      case "SET_USER_NAME": {
+        return {
+          ...state,
+          user: {...state.user, name: action.payload},
+        }
+      }
+      case "SET_USER_PWD": {
+        return {
+          ...state,
+          user: {...state.user, pwd: action.payload},
+        }
+      }
+
+      case "SET_USER_DETAILS": {
+        return {
+          ...state,
+          user: {...state.user,user : action.payload, user_add_successfull:true }
+
+        }
+      }
+
+}
+
+    return state
+}
