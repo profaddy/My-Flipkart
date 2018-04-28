@@ -8,7 +8,7 @@ import TodoApp from './Todoapp';
 import F_comment from './f_comment';
 import F_inputcomment from './f_inputcomment';
 import F_comment_header from './f_comment_header';
-import F_apicall from './f_apicall';
+//import F_apicall from './f_apicall';
 
 export default class Layout extends React.Component {
 constructor(){
