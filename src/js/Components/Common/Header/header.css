@@ -1,0 +1,23 @@
+.header_wrapper{
+
+ width: 100%; 
+ color:white;
+ background-color:#2874f0;
+ padding: 15px 50px 15px;
+ height: 52px;
+ font-family: Roboto, Arial, sans-serif;
+}
+
+.logo_img{
+
+  height: 22px;
+  width: 26px;
+
+}
+
+.logo{
+
+  float:left;
+  margin-right:10px
+
+}

@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux"
-import {form,FormGroup,FormControl,ControlLabel,HelpBlock,LoaderButton} from 'react-bootstrap'
-import {setUserName,setUserPwd,setUserdetails} from "../actions/useractions"
-
-
-class UserLogin extends React.Component {
+import {form,FormGroup,FormControl,ControlLabel,HelpBlock} from 'react-bootstrap'
+import {setUserName,setUserPwd,setUserdetails} from "../../../actions/useractions"
+class UserSignup extends React.Component {
 
 		constructor(){
 super();
@@ -32,18 +30,16 @@ handleonSubmit(){
 	
 	var user_name = this._user_name.value
 	var user_pwd  = this._user_pwd.value
+	var user_email  = this._user_email.value
 	console.log('test_username',user_name)
-	console.log('test_userpwd',user_pwd)
-	if (user_name === this.props.user_details.name){
-		return'success'
-	}
-	else{return 'failure'}
-	//this.props.dispatch(setUserdetails(user_name,user_pwd))
+	console.log('test_username',user_pwd)
+	console.log('test_username',user_email)
+	this.props.dispatch(setUserdetails(user_name,user_pwd,user_email))
 
 
 	this._user_name.value = ''
 	this._user_pwd.value = ''
-	
+	this._user_email.value = ''
 
 	
 }
@@ -60,8 +56,8 @@ render() {
 
 	       	    return (
 				    <div>
-				    	<form onSubmit={this.handleonSubmit.bind(this)}>
-							<h2>User Login </h2>
+				    	<form>
+							<h2>User Signup </h2>
 							<FormGroup controlId="formBasicText" validationState={this.getValidationState()}> 
 						
 							    <FormControl
@@ -73,15 +69,21 @@ render() {
   								
 						
 							</FormGroup>
-							<FormGroup> 
+							<FormGroup controlId="formBasicText"> 
 								<FormControl
 	        					type="password" 
 	       				 		placeholder="Enter Password"
 	        					inputRef={(a) => this._user_pwd = a}
 	      						/>
 							</FormGroup> 
-							
-							<button type='submit' class ='btn-danger' onClick = {this.handleonSubmit.bind(this)} > Login</button>
+							<FormGroup controlId="formBasicText"> 
+								<FormControl
+            					type="text" 
+           				 		placeholder="Enter Email"
+            					inputRef={(a) => this._user_email = a}
+          						/>
+							</FormGroup> 
+							<button type='button' class ='btn-danger' onClick = {this.handleonSubmit.bind(this)}>Signup</button>
 						</form>
 							
 						
@@ -103,4 +105,4 @@ const mapStateToProps = state =>  ({
 
 
 
-export default connect(mapStateToProps)(UserLogin);
+export default connect(mapStateToProps)(UserSignup);

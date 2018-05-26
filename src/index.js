@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Link , Switch } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import store from "./js/store"
 
-import Layout from "./js/components/layout"
-import UserSignup from "./js/components/usersignup"
-import  TodoApp  from './js/components/todoapp'
+import Home from "./js/Components/Home/home"
+import UserSignup from "./js/Components/Login&Signup/Signup/user_signup"
+import UserLogin from "./js/Components/Login&Signup/User_login/user_login"
 
 
 
@@ -15,9 +15,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
     	<switch>
-      <Route exact path="/" component={Layout} />
+      <Route exact path="/" component={Home} />
       <Route  path="/signup" component={UserSignup} />
-      <Route  path="/todoapp" component={TodoApp} />
+      <Route  path="/userlogin" component={UserLogin} />
       </switch>
     </Router>
   </Provider>,
