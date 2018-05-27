@@ -65,30 +65,30 @@ render() {
 									<h3>Login</h3>
 									<p>Get access to your orders, Wishlist and Recommendations</p>
 								</div>
-								<div class='col-sm-6'>
-				    	<form onSubmit={this.handleonSubmit.bind(this)}>
-							<h2>User Login </h2>
-							<FormGroup controlId="formBasicText" validationState={this.getValidationState()}> 
-						
-							    <FormControl
-            					type="text" 
-           				 		placeholder="Enter Username"
-            					inputRef={(a) => this._user_name = a}
-          						/>
-          						<FormControl.Feedback />
-  								
-						
-							</FormGroup>
-							<FormGroup> 
-								<FormControl
-	        					type="password" 
-	       				 		placeholder="Enter Password"
-	        					inputRef={(a) => this._user_pwd = a}
-	      						/>
-							</FormGroup> 
+								<div class='col-sm-6 Login_form'>
+									<form onSubmit={this.handleonSubmit.bind(this)}>
+									<FormGroup controlId="formBasicText" validationState={this.getValidationState()}> 
+								
+											<FormControl
+													type="text" 
+													placeholder="Enter Username"
+													inputRef={(a) => this._user_name = a}
+													/>
+													<FormControl.Feedback />
+								
+									</FormGroup>
+									<FormGroup> 
+										<FormControl
+												type="password" 
+												placeholder="Enter Password"
+												inputRef={(a) => this._user_pwd = a}
+												/>
+									</FormGroup> 
+									
+									<button type='submit' class='Login_button' onClick = {this.handleonSubmit.bind(this)} > Login</button>
+
+								</form>
 							
-							<button type='submit' class ='btn-danger' onClick = {this.handleonSubmit.bind(this)} > Login</button>
-						</form>
 							</div>
 							</div>
 						

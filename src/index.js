@@ -14,11 +14,11 @@ import UserLogin from "./js/Components/Login&Signup/User_login/user_login"
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-    	<switch>
+    	<Switch>
       <Route exact path="/" component={Home} />
       <Route  path="/signup" component={UserSignup} />
       <Route  path="/userlogin" component={UserLogin} />
-      </switch>
+      </Switch>
     </Router>
   </Provider>,
  document.getElementById('root')
