@@ -12,7 +12,7 @@ import "./home.css"
 
 export default class Home extends React.Component {
   render() {
-		console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>",Modal)
+		
     return (
 			<div>
 			<Header />

@@ -1,37 +1,55 @@
 import React, { Component } from 'react';
 import {Link } from 'react-router-dom';
 import {Button,Modal,closeButton} from 'react-bootstrap';
-import UserLogin from '../../Login&Signup/User_login/user_login'
+import UserLogin from '../../Login&Signup/User_login/user_login';
+import UserSignup from '../../Login&Signup/Signup/user_signup';
+import { connect } from "react-redux";
+import {Toggle_login,Toggle_login_off,Toggle_signup,Toggle_signup_off} from "../../../actions/modalactions"
+
 import './header.css'
 
-export default class Header extends React.Component {
+ class Header extends React.Component {
 
 		constructor(props){
       
     super(props);
     
     this.state={
-        show_login: false
+        
     };
-    this.handleShow=this.handleShow.bind(this);;
-    this.handleClose=this.handleClose.bind(this)
+    this.handleShow=this.handleShow.bind(this);
+    this.handleClose=this.handleClose.bind(this);
+    this.handleShowSignup=this.handleShowSignup.bind(this);
+		this.handleCloseSignup=this.handleCloseSignup.bind(this);
+   
   }
 
   handleShow(){
-    console.log('state before being set',this.state.show)
+    
 
-    this.setState({ show_login:true });
-    console.log('state after being set',this.state.show)
+    this.props.dispatch(Toggle_login());
+  
   }
 
   handleClose(){
 
-    this.setState({ show_login: false });
+    this.props.dispatch(Toggle_login_off());
   }
 
+  handleShowSignup(){
+    this.props.dispatch(Toggle_signup());
+  }
+  
+  handleCloseSignup(){
+  
+    this.props.dispatch(Toggle_signup_off());
+  }
+ 
+
   render() {
-    console.log('state after render',this.state.show);
-       
+    console.log('state after render',this.props.show_handlemodal);
+    console.log(this.props)
+
     return (
 
     	<div>
@@ -47,27 +65,54 @@ export default class Header extends React.Component {
               searchbar
             </div>
             <div class='col-sm-2'>
-              <button className='header-button' onClick={this.handleShow}>
+            <form>
+              <Button className='header-button' onClick={this.handleShow}>
               Login/Signup
-              </button>
+              </Button>
+              </form>
             </div>
           </div>
         </div>
       
-        <Modal show={this.state.show_login} onHide={this.handleClose}>
+        <Modal show={this.props.show_handlemodal.handlemodal.show_login} onHide={this.handleClose}>
+        
           <Modal.Header closeButton>
             
           </Modal.Header>
           <Modal.Body >
             <div>
              <UserLogin />
+             
             </div>
             
           </Modal.Body>
         </Modal>
-      
+
+        <Modal show={this.props.show_handlemodal.handlemodal.show_signup} onHide={this.handleCloseSignup}>
+        <Modal.Header closeButton>
+          
+        </Modal.Header>
+        <Modal.Body >
+          <div>
+          <UserSignup />
+          </div>
+          
+        </Modal.Body>
+      </Modal>
+
       </div>
      );
+
   }
 }
 
+const mapStateToProps = state =>  ({
+	
+  show_handlemodal:state.handlemodal,
+    
+	
+});
+
+
+
+export default connect(mapStateToProps)(Header);

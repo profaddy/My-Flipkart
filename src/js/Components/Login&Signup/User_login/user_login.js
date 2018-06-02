@@ -1,21 +1,35 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux"
-import {form,FormGroup,FormControl,ControlLabel,HelpBlock,LoaderButton} from 'react-bootstrap'
-import {setUserName,setUserPwd,setUserdetails} from "../../../actions/useractions"
-import './user_login.css'
+import {form,FormGroup,FormControl,ControlLabel,Button,HelpBlock,LoaderButton,Modal} from 'react-bootstrap'
+import {setUserName,setUserPwd,setUserdetails} from "../../../actions/useractions";
+import UserSignup from '../Signup/user_signup';
+import './user_login.css';
+import axios from 'axios';
+import {Toggle_login,Toggle_login_off,Toggle_signup,Toggle_signup_off} from "../../../actions/modalactions"
+
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 class UserLogin extends React.Component {
 
 		constructor(){
-super();
-this.state={
+		super();
+		this.state={
 
-	value:''
-};
+			value:'',
+			show_signup:false
+			
+		};
 
-this.handleonSubmit.bind(this);
-this.getValidationState.bind(this);
+		this.handleonSubmit.bind(this);
+		this.getValidationState.bind(this);
+		this.handleSignup.bind(this);
+}
+
+handleSignup(e){
+
+	e.preventDefault();
+	this.props.dispatch(Toggle_signup());
 
 }
 
@@ -28,71 +42,99 @@ getValidationState(){
 
 }
 
-handleonSubmit(){
+handleonSubmit(e){
+	e.preventDefault();
+	console.log('addy')
 	
 	var user_name = this._user_name.value
 	var user_pwd  = this._user_pwd.value
-	console.log('test_username',user_name)
-	console.log('test_userpwd',user_pwd)
-	if (user_name === this.props.user_details.name){
-		return'success'
+	const user={
+		email: user_name,
+		password:user_pwd
 	}
-	else{return 'failure'}
-	//this.props.dispatch(setUserdetails(user_name,user_pwd))
+	console.log('test api call',{user});
+	
+	/*fetch('http://localhost:9000/auth/login', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    email: user_name,
+    password:user_pwd
+  })
+})*/
 
+axios.post('http://localhost:9000/auth/login', {
+	user,
+
+})
+.then(function (response) {
+
+	console.log(response);
+})
+.catch(function (error) {
+	console.log(error);
+});
+
+	/*axios.post('http://localhost:9000/auth/login',{ user })
+	.then( res => {
+		console.log('hi addy i am here')
+		console.log('test',res.data);
+	})*/
+
+	//this.props.dispatch(setUserdetails(user_name,user_pwd))
 
 	this._user_name.value = ''
 	this._user_pwd.value = ''
-	
 
-	
 }
 
 render() {
-			console.log(this.props.user_details)
-	       
-	       console.log('render console',this.props.user_add_flag)
-	       console.log('render console',this.props)
-				var user_name_display = this.props.name
-				console.log(user_name_display)
-				var user_flag = this.props.user_add_flag
-				console.log(user_flag)
+		
 
-	       	    return (
+	       	return (
+						 
 						<div class='login_wrapper'>
+
 							<div class='row login_row'>
+
 								<div class='col-sm-6 Login_sidebar'>
+
 									<h3>Login</h3>
 									<p>Get access to your orders, Wishlist and Recommendations</p>
 								</div>
 								<div class='col-sm-6 Login_form'>
-									<form onSubmit={this.handleonSubmit.bind(this)}>
+
+									<form>
 									<FormGroup controlId="formBasicText" validationState={this.getValidationState()}> 
 								
 											<FormControl
-													type="text" 
+													type="email" 
 													placeholder="Enter Username"
 													inputRef={(a) => this._user_name = a}
 													/>
-													<FormControl.Feedback />
+											<FormControl.Feedback />
 								
 									</FormGroup>
 									<FormGroup> 
 										<FormControl
-												type="password" 
+												type="pasword" 
 												placeholder="Enter Password"
 												inputRef={(a) => this._user_pwd = a}
 												/>
 									</FormGroup> 
 									
 									<button type='submit' class='Login_button' onClick = {this.handleonSubmit.bind(this)} > Login</button>
+									<button onClick={this.handleSignup}>
+										New to Flipkart? Signup
+									</button>
+									</form>
+								
+							</div>
+							</div>
 
-								</form>
-							
-							</div>
-							</div>
-						
-						
 					</div>
 					
 	      		 );			
@@ -102,8 +144,7 @@ render() {
 
 const mapStateToProps = state =>  ({
 	
-    user_details:  state.user.user,
-    user_add_flag: state.user.user.user_add_successfull
+  show_handlemodal:state.handlemodal,
     
 	
 });
