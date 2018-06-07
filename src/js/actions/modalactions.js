@@ -19,6 +19,27 @@ import axios from "axios";
       })
   }
 }*/
+export function USER_LOGIN(user) {
+        return function(dispatch) {
+          dispatch({type: "USER_LOGIN"});
+
+          axios.post('http://localhost:9000/auth/login', {
+            user,
+
+          })
+          .then(function (response) {
+            
+            console.log(response);
+            dispatch({type: "USER_VALIDATED_OK", payload: response.data})
+          })
+          .catch(function (error) {
+            
+            console.log('error bata',error);
+            dispatch({type: "USER_VALIDATED_FAIL", payload: error.message})
+          });
+
+  }
+}
 
 export function Toggle_login() {
   console.log('test action hit')
