@@ -6,7 +6,7 @@ import {setUserName,setUserPwd,setUserdetails} from "../../../actions/useraction
 import UserSignup from '../Signup/user_signup';
 import './user_login.css';
 import axios from 'axios';
-import {Toggle_login,Toggle_login_off,Toggle_signup,Toggle_signup_off} from "../../../actions/modalactions"
+import {Toggle_login,Toggle_login_off,Toggle_signup,Toggle_signup_off,USER_LOGIN} from "../../../actions/modalactions"
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -17,21 +17,21 @@ class UserLogin extends React.Component {
 		this.state={
 
 			value:'',
-			show_signup:false
+			
 			
 		};
 
 		this.handleonSubmit.bind(this);
 		this.getValidationState.bind(this);
-		this.handleSignup.bind(this);
+		//this.handleSignup.bind(this);
 }
 
-handleSignup(e){
+/*handleSignup(e){
 
 	e.preventDefault();
-	this.props.dispatch(Toggle_signup());
+	this.props.dispatch(Toggle_signup());																																												());
 
-}
+}*/
 
 getValidationState(){
 
@@ -42,7 +42,7 @@ getValidationState(){
 
 }
 
-handleonSubmit(e){
+async handleonSubmit(e){
 	e.preventDefault();
 	console.log('addy')
 	
@@ -53,7 +53,8 @@ handleonSubmit(e){
 		password:user_pwd
 	}
 	console.log('test api call',{user});
-	
+
+	await this.props.dispatch(USER_LOGIN(user))
 	/*fetch('http://localhost:9000/auth/login', {
   method: 'POST',
   headers: {
@@ -66,17 +67,18 @@ handleonSubmit(e){
   })
 })*/
 
-axios.post('http://localhost:9000/auth/login', {
+/*axios.post('http://localhost:9000/auth/login', {
 	user,
 
 })
 .then(function (response) {
-
+	
 	console.log(response);
 })
 .catch(function (error) {
+
 	console.log(error);
-});
+});*/
 
 	/*axios.post('http://localhost:9000/auth/login',{ user })
 	.then( res => {
@@ -93,6 +95,10 @@ axios.post('http://localhost:9000/auth/login', {
 
 render() {
 		
+	var errormsg = this.props.show_handlemodal.fetching_error
+	var isError = this.props.show_handlemodal.fetching_user
+	console.log(errormsg)
+	console.log(isError)
 
 	       	return (
 						 
@@ -127,9 +133,12 @@ render() {
 									</FormGroup> 
 									
 									<button type='submit' class='Login_button' onClick = {this.handleonSubmit.bind(this)} > Login</button>
-									<button onClick={this.handleSignup}>
+									<button onClick={this.props.handleShowSignup}>
 										New to Flipkart? Signup
 									</button>
+									{isError && 
+									alert (`WE are facing some ${errormsg} please report to adnansaify11@gmail.com`)
+									}
 									</form>
 								
 							</div>

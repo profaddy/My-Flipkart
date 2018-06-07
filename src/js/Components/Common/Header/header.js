@@ -36,7 +36,8 @@ import './header.css'
     this.props.dispatch(Toggle_login_off());
   }
 
-  handleShowSignup(){
+  handleShowSignup(e){
+    e.preventDefault();
     this.props.dispatch(Toggle_signup());
   }
   
@@ -47,6 +48,7 @@ import './header.css'
  
 
   render() {
+    console.log('state after render',this.props.show_handlemodal);
     console.log('state after render',this.props.show_handlemodal);
     console.log(this.props)
 
@@ -66,9 +68,11 @@ import './header.css'
             </div>
             <div class='col-sm-2'>
             <form>
+            
               <Button className='header-button' onClick={this.handleShow}>
               Login/Signup
               </Button>
+            
               </form>
             </div>
           </div>
@@ -94,7 +98,7 @@ import './header.css'
         </Modal.Header>
         <Modal.Body >
           <div>
-          <UserSignup />
+          <UserSignup handleShowSignup={this.handleShowSignup} />
           </div>
           
         </Modal.Body>
