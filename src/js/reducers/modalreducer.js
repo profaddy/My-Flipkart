@@ -60,8 +60,7 @@ export default function reducer(state={
 
       case "USER_VALIDATED_FAIL" :{
         let newState = {...state}
-        newState.fetching_user_fail = false;
-        newState.fetching_user_ok = true;
+        newState.fetching_user_fail = true;
         newState.fetching_error = action.payload;
         return newState;
 
