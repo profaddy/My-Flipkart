@@ -5,7 +5,8 @@ export default function reducer(state={
     },
     data:{},
     fetching_error:'error not catched',
-    fetching_user:''
+    fetching_user:'',
+    isError:false
   }, action) {
 
     switch (action.type) {
@@ -13,6 +14,7 @@ export default function reducer(state={
       case "Toggle_login": {
         let newState = {...state}
         newState.handlemodal.show_login = true;
+        newState.handlemodal.show_signup = false;
         return newState;
         break;
       }
@@ -20,6 +22,7 @@ export default function reducer(state={
        case "Toggle_login_off": {
         let newState = {...state}
         newState.handlemodal.show_login = false;
+        newState.isError = false;
         return newState;
         break;
         
@@ -36,6 +39,7 @@ export default function reducer(state={
        case "Toggle_signup_off": {
         let newState = {...state}
         newState.handlemodal.show_signup = false;
+        newState.isError = false;
         return newState;
         break;
         
@@ -61,6 +65,33 @@ export default function reducer(state={
       case "USER_VALIDATED_FAIL" :{
         let newState = {...state}
         newState.fetching_user_fail = true;
+        newState.isError = true;
+        newState.fetching_error = action.payload;
+        return newState;
+
+      }
+
+      case "USER_SIGNUP" :{
+        let newState = {...state}
+        newState.fetching_user = true;
+        return newState;
+
+      }
+
+      case "USER_SIGNUP_OK" :{
+        let newState = {...state}
+        newState.fetching_user_ok = true;
+        newState.fetching_user = false;
+        newState.data = action.payload;
+        console.log('responsedata',newState)
+        return newState;
+
+      }
+
+      case "USER_SIGNUP_FAIL" :{
+        let newState = {...state}
+        newState.fetching_user_fail = true;
+        newState.isError = true;
         newState.fetching_error = action.payload;
         return newState;
 

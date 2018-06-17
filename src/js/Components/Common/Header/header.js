@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link } from 'react-router-dom';
+import {Link,history} from 'react-router-dom';
 import {Button,Modal,closeButton} from 'react-bootstrap';
 import UserLogin from '../../Login&Signup/User_login/user_login';
 import UserSignup from '../../Login&Signup/Signup/user_signup';
@@ -20,6 +20,7 @@ import './header.css'
     this.handleShow=this.handleShow.bind(this);
     this.handleClose=this.handleClose.bind(this);
     this.handleShowSignup=this.handleShowSignup.bind(this);
+    this.handleShowLogin=this.handleShowLogin.bind(this);
 		this.handleCloseSignup=this.handleCloseSignup.bind(this);
    
   }
@@ -41,6 +42,11 @@ import './header.css'
     this.props.dispatch(Toggle_signup());
   }
   
+  handleShowLogin(e){
+    e.preventDefault();
+    this.props.dispatch(Toggle_login());
+
+  }
   handleCloseSignup(){
   
     this.props.dispatch(Toggle_signup_off());
@@ -85,7 +91,7 @@ import './header.css'
           </Modal.Header>
           <Modal.Body >
             <div>
-             <UserLogin handleShowSignup={this.handleShowSignup}/>
+             <UserLogin handleShowSignup={this.handleShowSignup} route_history={this.props.route_history}/>
              
             </div>
             
@@ -98,7 +104,7 @@ import './header.css'
         </Modal.Header>
         <Modal.Body >
           <div>
-          <UserSignup handleShowSignup={this.handleShowSignup} />
+          <UserSignup handleShowLogin={this.handleShowLogin} />
           </div>
           
         </Modal.Body>

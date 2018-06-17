@@ -41,6 +41,27 @@ export function USER_LOGIN(user) {
   }
 }
 
+export function USER_SIGNUP(user) {
+  return function(dispatch) {
+    dispatch({type: "USER_SIGNUP"});
+
+    axios.post('http://localhost:9000/auth/signup', {
+      user,
+
+    })
+    .then(function (response) {
+      
+      console.log(response);
+      dispatch({type: "USER_SIGNUP_OK", payload: response.data})
+    })
+    .catch(function (error) {
+      
+      console.log('error bata',error);
+      dispatch({type: "USER_SIGNUP_FAIL", payload: error.message})
+    });
+
+}
+}
 export function Toggle_login() {
   console.log('test action hit')
  return {

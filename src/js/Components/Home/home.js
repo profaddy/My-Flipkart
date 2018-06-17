@@ -13,10 +13,10 @@ import "./home.css"
 
 export default class Home extends React.Component {
   render() {
-		console.log(this.props.history)
+		console.log('history',this.props.history)
     return (
 			<div>
-        <Header />   
+        <Header route_history={this.props.history} />   
         <div>This is home page</div>
       </div>
     );
