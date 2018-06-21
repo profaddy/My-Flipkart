@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom';
-import { connect, } from "react-redux"
+import { Navlink } from 'react-router-dom';
+import { connect } from "react-redux"
 import {bindActionCreators} from "redux"
 import {form,FormGroup,FormControl,ControlLabel,Button,HelpBlock,LoaderButton,Modal} from 'react-bootstrap'
 import {setUserName,setUserPwd,setUserdetails} from "../../../actions/useractions";
@@ -36,7 +36,9 @@ getValidationState(){
 
 handleonSubmit(e){
 	e.preventDefault();	
-//this.props.route_history.push('/products')
+	
+	
+this.props.route_history.push('/products/${userid}')
 	var user_email = this._user_name.value
 	var user_pwd   = this._user_pwd.value
 	const user={
@@ -61,6 +63,7 @@ render() {
 	var isError = this.props.show_handlemodal.isError
 	var response_msg= this.props.show_handlemodal.data.message
 	var response_success= this.props.show_handlemodal.data.success
+	var userid='addy'
 	console.log('login history',this.props.route_history)
 
 	console.log(errormsg)
@@ -104,7 +107,9 @@ render() {
 									<button type='submit' class='Login_button'> Login</button>
 									
 									{isError && 
+										
 									<p>`We are facing some {errormsg} please report to adnansaify11@gmail.com`</p>
+									
 									}
 									{!response_success &&
 										<p>{response_msg}</p>

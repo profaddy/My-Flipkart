@@ -4,7 +4,7 @@ export default function reducer(state={
      show_signup:false
     },
     data:{},
-    fetching_error:'error not catched',
+    fetching_error:'unknown error',
     fetching_user:'',
     isError:false
   }, action) {
@@ -32,6 +32,7 @@ export default function reducer(state={
         let newState = {...state}
         newState.handlemodal.show_signup = true;
         newState.handlemodal.show_login = false;
+        newState.isError = false;
         return newState;
         break;
       }
