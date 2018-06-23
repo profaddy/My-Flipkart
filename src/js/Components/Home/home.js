@@ -9,6 +9,7 @@ import UserLogin from "../Login&Signup/User_login/user_login";
 import Header from "../Common/Header/header";
 import Footer from "../Common/Footer/footer";
 import Heatchart from "../D3 Heatmap/d3heatmap";  
+import Products from "../Products/products"
 import "./home.css"
 
 export default class Home extends React.Component {
@@ -16,7 +17,8 @@ export default class Home extends React.Component {
 		console.log('history',this.props.history)
     return (
 			<div>
-        <Header route_history={this.props.history} />   
+        <Header route_history={this.props.history} />  
+        <Products /> 
         <div>This is home page</div>
       </div>
     );
