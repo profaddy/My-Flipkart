@@ -17,6 +17,7 @@ ReactDOM.render(
     <Router>
     	<Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/home" component={Home} />
       <Route  path="/signup" component={UserSignup} />
       <Route  path="/userlogin" component={UserLogin} />
       <Route  path="/products/:userid" component={Products} />
