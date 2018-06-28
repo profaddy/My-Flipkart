@@ -18,10 +18,13 @@ export default class Home extends React.Component {
   render() {
 		console.log('history',this.props.history)
     return (
-			<div>
-        <Header route_history={this.props.history} />  
-        <ProductListings products={data.products}/> 
-        <div>This is home page</div>
+      <div>
+     
+      <Header route_history={this.props.history} />  
+			  <div className='page-container'>
+        <div><h3>Products</h3></div>
+          <ProductListings products={data.products}/> 
+        </div>
       </div>
     );
   }

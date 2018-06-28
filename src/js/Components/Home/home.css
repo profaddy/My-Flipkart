@@ -3,3 +3,15 @@
   background-color: rgb(243, 193, 193);
 
 }
+
+.page-container{
+
+  width:800px;
+  padding:22px;
+  background-color:white;
+  margin: 10px auto;
+}
+body{
+  background-color:skyblue;
+
+}
