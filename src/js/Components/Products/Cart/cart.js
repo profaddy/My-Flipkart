@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { Navlink } from 'react-router-dom';
 import { connect } from "react-redux"
 import {bindActionCreators} from "redux"
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+import Header from "../../Common/Header/header"
+import {CartItemQuantity} from '../Cart/index'
+import ProductListItems from '../../Products/ProductsLIstItems'
+//axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 
 	class Cart extends React.Component {
@@ -25,19 +28,37 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 	render() {
 
 		console.log('props products',this.props);			
-    var Cart_items = this.props.cart.data.map{(item) => }
+		//var itemInCart = this.props.cart.filter(item => item.id === this.props.product.id)[0];cart
+		var itemIncart = this.props.cart.map(items => {
+						return(
+							<div id={items.id}>
+							
+						{items.name}
+							
+						<ProductListItems
+						product={items}
+						//addToCart={props.addTocart}
+					 // totIteminCart={totIteminCart}
+						cart={CartItemQuantity(this.props.cart)} />
+							</div>
+						);
+		})
+		console.log('cart tems',itemIncart)
+	
     
-		return(
-			<div>
-		
-			</div>);
+		return(<div>
+			<Header />
+			{itemIncart}
+			
+		</div>);
 	
 		}
 	}
 	
 	const mapStateToProps = state =>  ({
 	
-		products:state.products
+		products:state.products,
+		cart:state.cart
 		
 	});
 	export default connect(mapStateToProps)(Cart);

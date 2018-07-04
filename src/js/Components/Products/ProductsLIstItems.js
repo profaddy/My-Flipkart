@@ -13,10 +13,12 @@ import {bindActionCreators} from "redux";
     }
   
     render(){
-      console.log('products',this.props)
+      console.log('cart',this.props.cart)
+      console.log('products',this.props.product)
   var itemInCart = this.props.cart.filter(item => item.id === this.props.product.id)[0];
+ 
   return(
-    <div className='product-list-item col-sm-6'>
+    <div className='product-list-item'>
       
      <h3> {this.props.product.name}</h3>
      <img
@@ -24,10 +26,10 @@ import {bindActionCreators} from "redux";
       title={this.props.product.name}
       src={`/products/${this.props.product.image}` }
       />
-      <div>{this.props.product.description}</div>
-      <div>Rs.{this.props.product.price}</div>
+      <div classNmae='product-des'>{this.props.product.description}</div>
+      <div classNmae='product-pri'>Rs.{this.props.product.price}</div>
       <div>
-      <button onClick={ () => this.props.dispatch(ADD_ITEM(this.props.product))}>
+      <button bSstyle='danger' onClick={ () => this.props.dispatch(ADD_ITEM(this.props.product,this.props.totIteminCart))}>
       Add to cart({(itemInCart && itemInCart.quantity) || 0})
       </button></div>
     </div>

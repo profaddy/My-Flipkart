@@ -21,8 +21,13 @@ import './header.css'
     this.handleClose=this.handleClose.bind(this);
     this.handleShowSignup=this.handleShowSignup.bind(this);
     this.handleShowLogin=this.handleShowLogin.bind(this);
-		this.handleCloseSignup=this.handleCloseSignup.bind(this);
+    this.handleCloseSignup=this.handleCloseSignup.bind(this);
+    this.handleCart=this.handleCart.bind(this);
    
+  }
+
+  handleCart(){
+    this.props.route_history.push(`/cart`)
   }
 
   handleShow(){
@@ -78,8 +83,15 @@ import './header.css'
               <Button className='header-button' onClick={this.handleShow}>
               Login/Signup
               </Button>
+
+         
             
               </form>
+            </div>
+            <div class='col-sm-2'>
+           
+            <Link to={`/cart`} activeClassName="active">My Cart</Link>
+           
             </div>
           </div>
         </div>

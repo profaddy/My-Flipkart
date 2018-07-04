@@ -1,10 +1,18 @@
-export default function cartReducer(state=[], action) {
+export default function cartReducer(state=[
+
+  
+
+
+], action) {
 
   switch (action.type) {
     
     case "ADD_ITEM" :{
-     
-      return [...state, action.payload];
+      
+     let newState = [...state,action.payload]
+    
+    
+      return newState
 
     }
 

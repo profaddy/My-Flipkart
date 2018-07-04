@@ -37,8 +37,8 @@ getValidationState(){
 handleonSubmit(e){
 	e.preventDefault();	
 	
-	
-this.props.route_history.push('/products/${userid}')
+	var userid = 2
+this.props.route_history.push(`/products/${userid}`)
 	var user_email = this._user_name.value
 	var user_pwd   = this._user_pwd.value
 	const user={

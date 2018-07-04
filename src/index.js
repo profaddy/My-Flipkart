@@ -8,6 +8,7 @@ import Home from "./js/Components/Home/home"
 import Products from "./js/Components/Products/products"
 import UserSignup from "./js/Components/Login&Signup/Signup/user_signup"
 import UserLogin from "./js/Components/Login&Signup/User_login/user_login"
+import Cart from "./js/Components/Products/Cart/cart"
 
 
 
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route  path="/signup" component={UserSignup} />
       <Route  path="/userlogin" component={UserLogin} />
       <Route  path="/products/:userid" component={Products} />
+      <Route  path="/cart" component={Cart} />
       </Switch>
     </Router>
   </Provider>,
