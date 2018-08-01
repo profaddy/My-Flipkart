@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Navlink } from 'react-router-dom';
+import { Navlink,history } from 'react-router-dom';
 import { connect } from "react-redux"
 import {bindActionCreators} from "redux"
 import Header from "../../Common/Header/header"
 import {CartItemQuantity} from '../Cart/index'
 import ProductListItems from '../../Products/ProductsLIstItems'
+import {Toggle_login,Toggle_login_off,Toggle_signup,Toggle_signup_off} from "../../../actions/modalactions"
 //axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 
@@ -20,10 +21,21 @@ import ProductListItems from '../../Products/ProductsLIstItems'
 			//bind functions here
 	}
 
+	//componentWillMount(){
+		//	if (this.props.user.isUserloggedin === true)
+		//	{
+			//	this.props.dispatch(Toggle_login())
+		//	}
+
+	
+	//}
+
 	componentDidMount(){
 
 	
 	}
+
+
 		
 	render() {
 
@@ -58,7 +70,8 @@ import ProductListItems from '../../Products/ProductsLIstItems'
 	const mapStateToProps = state =>  ({
 	
 		products:state.products,
-		cart:state.cart
+		cart:state.cart,
+		user:state.user.user
 		
 	});
 	export default connect(mapStateToProps)(Cart);

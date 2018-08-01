@@ -7,7 +7,8 @@ export default function reducer(state={
     fetching: false,
     fetched: false,
     error: null,
-    user_add_successfull:false
+    user_add_successfull:false,
+    isUserloggedin : true
     },
   }, action) {
 
