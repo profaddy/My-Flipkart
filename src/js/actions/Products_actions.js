@@ -1,20 +1,17 @@
+
 import axios from "axios";
 
-export function PRODUCTS_FETCHING() {
+ export function fetch_products() {
+   console.log('i am in action file')
   return function(dispatch) {
-    dispatch({type: "PRODUCTS_FETCHING"});
-
-    axios.post('http://localhost:9000/auth/login')
-    .then(function (response) {
-      
-      console.log(response);
-      dispatch({type: "PRODUCTS_FETCHED", payload: response.data})
-    })
-    .catch(function (error) {
-      
-      console.log('error Data',error);
-      dispatch({type: "PRODUCTS_FETCH_FAIL", payload: error.message})
-    });
-
-}
+  dispatch({type: "PRODUCTS_FETCHING"});
+    
+    axios.get("http://demo2769628.mockable.io/products")
+      .then((response) => {
+        dispatch({type: "PRODUCTS_FETCHED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "PRODUCTS_FETCH_FAIL", payload: err.message})
+      })
+  }
 }

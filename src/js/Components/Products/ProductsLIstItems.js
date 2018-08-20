@@ -2,6 +2,9 @@ import React from 'react';
 import './index.css'
 import {ADD_ITEM} from "../../actions/cartActions"
 import { connect } from "react-redux"
+import { Link } from 'react-router-dom'
+
+
 import {bindActionCreators} from "redux";
 
 
@@ -18,21 +21,33 @@ import {bindActionCreators} from "redux";
   var itemInCart = this.props.cart.filter(item => item.id === this.props.product.id)[0];
  
   return(
-    <div className='product-list-item'>
-      
-     <h3> {this.props.product.name}</h3>
-     <img
-      height={100}
-      title={this.props.product.name}
-      src={`/products/${this.props.product.image}` }
-      />
-      <div classNmae='product-des'>{this.props.product.description}</div>
-      <div classNmae='product-pri'>Rs.{this.props.product.price}</div>
+    
+    <div className='productsListitems-container'>
+    
+      <div>
+        <h3> {this.props.product.name}</h3>
+      </div>
+      <div>
+        <img
+          height={100}
+          title={this.props.product.name}
+          src={`/products/${this.props.product.image}` }
+          />
+      </div>
+      <div>
+      {this.props.product.description}
+      </div>
+      <div>
+      Rs.{this.props.product.price
+      }</div>
       <div>
       <button bSstyle='danger' onClick={ () => this.props.dispatch(ADD_ITEM(this.props.product,this.props.totIteminCart))}>
       Add to cart({(itemInCart && itemInCart.quantity) || 0})
-      </button></div>
+      </button>
+      </div>
+     
     </div>
+  
 );
     }
 }

@@ -7,33 +7,25 @@ import {ADD_ITEM} from "../../actions/cartActions"
 import {CartItemQuantity} from "../Products/Cart/index"
 
  function ProductListing(props) {
-  
-  //let cart= CartItemQuantity(props.cart)
-  //var itemInCart = cart.length
-  //let totIteminCart = itemInCart //&& (totIteminCart + itemInCart.quantity)
-  //console.log('tot cart_item',props.cart.totItem)
-  console.log('show cart',props.cart)
 
+    const content = props.product.map(product => {
 
-  return(
-  
-    <div className='products-listing'>
-    {
-      props.products.map(product => 
+            return(
+                <ProductListItems
+                  product={product}
+                  cart={CartItemQuantity(props.cart)}
+                /> 
+              );
+           })
 
-        <ProductListItems
-          product={product}
-          //addToCart={props.addTocart}
-         // totIteminCart={totIteminCart}
-          cart={CartItemQuantity(props.cart)}
-        />
+    return(
       
-      )
-    }
-    </div>
-  
+      <div className='productListing-container'>
+          {content}
+      </div>
+    
 
-  );
+    );
 }
 
 const mapStateToProps = state =>  ({

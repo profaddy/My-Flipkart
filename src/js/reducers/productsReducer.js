@@ -1,8 +1,5 @@
 export default function reducer(state={
-  products: {
-  
-    
-  },
+  products: {},
   isProducts_fetched:false,
   isProducts_fetch_error:false,
   isProducts_fetching:false,
@@ -23,10 +20,11 @@ export default function reducer(state={
     }
 
     case "PRODUCTS_FETCHED" :{
+      console.log('peoducts fetched from productsreducer',action.payload)
       let newState = {...state}
       newState.isProducts_fetched = true;
       newState.isProducts_fetching = false;
-      newState.data = action.payload;
+      newState.products = action.payload;
       return newState;
 
     }
